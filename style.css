@@ -208,10 +208,3 @@ body {
     .countdown-timer {
         margin: 20px 0 !important;
     }
-
-    /* ૫. 'Created by' ને સૌથી નીચે મોકલો */
-    .logo {
-        margin-top: 60px !important; 
-        padding-bottom: 40px; /* નીચેથી એક્સ્ટ્રા જગ્યા */
-    }
-}
