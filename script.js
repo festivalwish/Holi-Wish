@@ -68,4 +68,31 @@ function toggleMusic() {
         text.innerText = "બંધ છે";
         btn.style.animation = "gift-pulse 1.5s infinite";
     }
+
+}
+let lastSongIndex = -1; // છેલ્લા વાગેલા ગીતનો ઇન્ડેક્સ સ્ટોર કરવા માટે
+
+function toggleMusic() {
+    let audio = document.getElementById('myAudio');
+    let btn = document.getElementById('music-btn');
+    let text = document.querySelector('.music-text');
+
+    if (audio.paused) {
+        let newIndex;
+        // જ્યાં સુધી નવો ઇન્ડેક્સ જુદો ના આવે ત્યાં સુધી રેન્ડમ નંબર જનરેટ કરો
+        do {
+            newIndex = Math.floor(Math.random() * songs.length);
+        } while (newIndex === lastSongIndex);
+
+        lastSongIndex = newIndex;
+        audio.src = songs[newIndex]; // નવું ગીત સેટ કરો
+        audio.load();
+        audio.play();
+        text.innerText = "વાગી રહ્યું છે...";
+        btn.style.animation = "none";
+    } else {
+        audio.pause();
+        text.innerText = "બંધ છે";
+        btn.style.animation = "gift-pulse 1.5s infinite";
+    }
 }
