@@ -1,0 +1,217 @@
+body {
+    margin: 0; padding: 0; height: 100vh; width: 100vw;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: flex-start; background: #fffafa;
+    font-family: 'Arial', sans-serif; overflow: hidden; position: relative;
+}
+
+header { margin-top: 80px; z-index: 10; text-align: center; padding: 0 15px; }
+#main-title { font-size: 1.4rem; animation: colorShift 4s infinite linear; margin: 0; line-height: 1.4; }
+
+.character-container { 
+    position: relative; width: 100%; height: 35vh; 
+    display: flex; justify-content: center; align-items: center; 
+    z-index: 5; margin-top: 15px;
+}
+
+/* સેન્ટર કલર PNG */
+.img-color {
+    position: absolute; top: 50%; left: 49%;  width: 60%;
+    transform: translate(-50%, -50%); opacity: 0.7; z-index: 4; 
+}
+
+/* છોકરી હવે ડાબી બાજુ */
+.img-girl { position: absolute; top: 60%; right: 8%; height: 100%; z-index: 6; }
+
+/* છોકરો હવે જમણી બાજુ */
+.img-boy { position: absolute;top: 50%;  left: 8%; height: 120%; z-index: 6; }
+
+/* બાકીની સ્ટાઇલ અગાઉ મુજબ જ છે */
+.countdown-timer { margin-top: 10px; text-align: center; z-index: 10; }
+#timer-text { font-size: 0.8rem; font-weight: bold; color: #e91e63; display: block; margin-bottom: 5px; }
+#timer { font-size: 1.2rem; font-weight: 800; display: flex; gap: 8px; justify-content: center; color: #333; }
+#timer span { padding: 4px 8px; background: rgba(233, 30, 99, 0.1); border-radius: 6px; border: 1px solid rgba(233, 30, 99, 0.2); }
+
+.quote-box { 
+    background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 15px; 
+    margin: 15px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
+    z-index: 10; border-left: 5px solid #e91e63; min-height: 100px;
+    display: flex; align-items: center; justify-content: center;
+}
+
+#random-quote { font-size: 1.05rem; font-weight: bold; color: #333; margin: 0; line-height: 1.5; }
+
+.footer-ui { margin-top: 10px; z-index: 10; display: flex; flex-direction: column; gap: 10px; width: 85%; }
+input { padding: 12px; border-radius: 30px; border: 2px solid #e91e63; text-align: center; outline: none; }
+.btn { padding: 12px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; color: white; text-align: center; text-decoration: none; }
+.btn-create { background: linear-gradient(to right, #ff4081, #ff9100); }
+.btn-share { background: #25D366; display: none; }
+
+.logo { position: absolute; bottom: 10px; right: 15px; font-size: 0.8rem; text-decoration: none; font-weight: bold; z-index: 20; animation: colorShift 3s infinite; }
+
+@keyframes colorShift { 0% { color: #e91e63; } 33% { color: #2196f3; } 66% { color: #4caf50; } 100% { color: #e91e63; } }
+.dot { position: absolute; border-radius: 50%; z-index: 2; animation: drift 5s linear forwards; }
+@keyframes drift { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-110vh); opacity: 0; } }
+/* આ કોડ મોબાઈલ સ્ક્રીન માટે છે */
+@media screen and (max-width: 600px) {
+    header {
+        margin-top: 30px; /* ટાઈટલ થોડું ઉપર જશે */
+    }
+
+    #main-title {
+        font-size: 1.1rem; /* મોબાઈલમાં અક્ષર નાના થશે */
+    }
+
+    .character-container {
+        height: 220px; /* ફોટા માટેની જગ્યા ઓછી થશે જેથી ઓવરલેપિંગ ન થાય */
+    }
+
+    .img-color {
+        width: 140px; /* મોબાઈલમાં કલર PNG હજુ નાનો થશે */
+    }
+
+    .img-girl, .img-boy {
+        height: 160px; /* છોકરા-છોકરીના ફોટા નાના થશે જેથી લખાણ દેખાય */
+    }
+
+    #timer {
+        font-size: 1rem; /* કાઉન્ટડાઉન નાનું થશે */
+    }
+
+    .quote-box {
+        padding: 12px;
+        margin: 15px;
+    }
+
+    #random-quote {
+        font-size: 0.9rem; /* શાયરીના અક્ષરો મોબાઈલ મુજબ સેટ થશે */
+    }
+}
+/* ફુગ્ગાની સ્ટાઈલ */
+.balloon {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    z-index: 100;
+    pointer-events: none;
+    animation: drop 1.5s ease-in forwards;
+}
+
+/* ફુગ્ગો નીચે પડવાનું એનિમેશન */
+@keyframes drop {
+    0% { transform: translateY(-100px) scale(1); opacity: 1; }
+    90% { transform: translateY(70vh) scale(1); opacity: 1; }
+    100% { transform: translateY(75vh) scale(0); opacity: 0; }
+}
+
+/* ફુગ્ગો ફૂટે ત્યારે થતો કલર સ્પલેશ */
+.splash {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    z-index: 99;
+    pointer-events: none;
+    animation: burst 0.6s ease-out forwards;
+}
+
+@keyframes burst {
+    0% { transform: scale(0); opacity: 1; box-shadow: 0 0 0 0 white; }
+    100% { transform: scale(40); opacity: 0; box-shadow: 0 0 20px 10px white; }
+}
+/* ગિફ્ટ બટનની પ્રોફેશનલ ડિઝાઇન */
+.music-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(45deg, #ff4081, #e91e63);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000 !important; /* સૌથી ઉપર રાખવા માટે */
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.5);
+    animation: gift-pulse 1.5s infinite;
+    pointer-events: auto !important; /* ટચ ફિક્સ કરવા માટે */
+}
+
+.music-float span { font-size: 30px; }
+
+.music-text {
+    font-size: 10px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2px;
+}
+
+/* ધબકતું એનિમેશન */
+@keyframes gift-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(233, 30, 99, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(233, 30, 99, 0); }
+}
+/* ૨. કલર PNG ને પહોળો (Pholo) કરવા માટે */
+.img-color {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px; /* ૨૨૦ માંથી વધારીને ૩૨૦ કર્યો જેથી તે વધુ 'પહોળો' દેખાય */
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+    z-index: 1;
+}
+/* ૩. 'Created by' અને નીચેની જગ્યા વધારવા માટે */
+body {
+    padding-bottom: 120px; /* નીચેથી ૧૨૦ પિક્સેલની જગ્યા છોડશે જેથી કશું ભેગું ન થાય */
+}
+
+.logo {
+    display: block;
+    margin-top: 50px; /* ઉપરથી ૫૦ પિક્સેલની જગ્યા */
+    margin-bottom: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #e91e63;
+    text-decoration: none;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+/* આ કોડ તમારી Media Query (@media screen and (max-width: 600px)) ની અંદર મૂકવો */
+@media screen and (max-width: 600px) {
+    
+    /* ૧. 3D ટાઈટલને મોબાઈલ મુજબ નાનું કરો */
+    #main-title {
+        font-size: 1.4rem !important; /* અક્ષરો નાના થશે એટલે જગ્યા વધશે */
+        text-shadow: 2px 2px 0px #ffffff, 3px 3px 10px rgba(0,0,0,0.2);
+    }
+
+    /* ૨. ફોટાઓ માટેની જગ્યા ફિક્સ કરો */
+    .character-container {
+        height: 220px !important; /* ઊંચાઈ વધારવી જેથી નીચેનું કાઉન્ટડાઉન દબાય નહીં */
+        margin-top: 10px;
+    }
+
+    /* ૩. પહોળો (Wide) કલર PNG મોબાઈલમાં કંટ્રોલ કરો */
+    .img-color {
+        width: 100% !important; /* સ્ક્રીનની બહાર નહીં જાય */
+        max-width: 250px;
+        opacity: 0.4;
+    }
+
+    /* ૪. કાઉન્ટડાઉન અને શાયરી વચ્ચે ગેપ */
+    .countdown-timer {
+        margin: 20px 0 !important;
+    }
+
+    /* ૫. 'Created by' ને સૌથી નીચે મોકલો */
+    .logo {
+        margin-top: 60px !important; 
+        padding-bottom: 40px; /* નીચેથી એક્સ્ટ્રા જગ્યા */
+    }
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <div id="music-btn" class="music-float" onclick="toggleMusic()">
+    <span id="music-icon">🎵</span>
+    <div class="music-text">Music ચાલુ કરો</div>
+</div>
+    <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ધૂળેટીની હાર્દિક શુભેચ્છાઓ!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="myAudio" loop><source src="music.mp3" type="audio/mpeg"></audio>
+
+    <header>
+        <h1 id="main-title">ધૂળેટીની હાર્દિક શુભેચ્છાઓ! 🎨</h1>
+    </header>
+
+    <div class="character-container">
+        <img src="color.png" class="img-color" alt="color">
+        <img src="girl.png" class="img-girl" alt="girl"> <img src="boy.png" class="img-boy" alt="boy">   </div>
+
+    <div id="countdown-container" class="countdown-timer">
+        <span id="timer-text">હોળી આડે હવે: </span>
+        <div id="timer">ગણતરી ચાલુ છે...</div>
+    </div>
+
+    <div class="quote-box">
+        <p id="random-quote">શુભેચ્છા લોડ થઈ રહી છે...</p>
+    </div>
+
+    <div class="footer-ui">
+        <input type="text" id="nameInput" placeholder="તમારું નામ અહીં લખો...">
+        <button class="btn btn-create" id="createBtn" onclick="previewWish()">શુભેચ્છાઓ બનાવો</button>
+        <a href="#" class="btn btn-share" id="shareBtn" onclick="sendToWhatsApp()">શુભેચ્છાઓ મોકલો 📲</a>
+    </div>
+
+    <a href="#" class="logo">Created by [તમારું નામ]</a>
+
+    <script>
+        const quotes = [
+            "રંગોના તહેવાર, ધુળેટી ના શુભ દિવસે સૌ સ્નેહી જનોનું જીવન રંગોથી ભરપૂર રહે એવી પરમ કૃપાળુ પરમાત્મા ને પ્રાર્થના. 🌹 ધુળેટી ની હાર્દિક શુભેચ્છાઓ 🌹",
+            "રંગોનો આ તહેવાર તમને અને તમારા પરિવારના જીવનમાં ઉત્સાહ, સુખ અને તેજ લાવે. મારા તરફથી હોળી અને ધુળેટી ની હાર્દિક શુભકામનાઓ. 🌻 Happy Holi 2026 🌻",
+            "હું ભરી આવું રંગની મુઠ્ઠી 🌈, તું લઈ આવજે કોરુ મન 👐, કેસુડાના ફુલની સાખે 🏵️, વગડો બનશે વૃંદાવન..🌱 🌹 ધુળેટી ની હાર્દિક શુભેચ્છાઓ 🌹",
+            "જીવન એ એક રંગીન તહેવાર છે,પરમાત્મા આપના જીવન રૂપી કેનવાસ ને પ્રેમ, સુખ, સમૃદ્ધિ, સફળતા અને સારા સ્વાસ્થથી રંગી દે તેવી પ્રાથના. 🌻 ધુળેટી ની હાર્દિક શુભેચ્છાઓ 🌻",
+            "હોળીના આ તહેવાર માં આપનું જીવન રંગો થી ભરેલું રહે,ખુશીઓ રહે સદાય તમારા હોઠો પર,તમને અને તમારા પરિવાર ને હોળી ધૂળેટીની શુભેચ્છાઓ… 🏵️ ધુળેટી ની હાર્દિક શુભેચ્છાઓ 🌈"
+        ];
+
+        let currentQuoteIndex = 0;
+
+        function updateCountdown() {
+            const targetDate = new Date("March 4, 2026 00:00:00").getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference <= 0) {
+                document.getElementById("countdown-container").style.display = "none";
+                return;
+            }
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = `<span>${days}d</span> <span>${hours}h</span> <span>${minutes}m</span> <span>${seconds}s</span>`;
+        }
+
+        window.onload = function() {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const sharedName = urlParams.get('name');
+            const quoteID = urlParams.get('q'); 
+
+            if (sharedName && quoteID !== null) {
+                currentQuoteIndex = parseInt(quoteID);
+                document.getElementById('random-quote').innerText = quotes[currentQuoteIndex];
+                document.getElementById('main-title').innerText = decodeURIComponent(sharedName) + " ના તરફથી આપ તથા આપના પરિવાર સૌને ધૂળેટીની હાર્દિક શુભેચ્છાઓ! 🌈";
+                document.getElementById('nameInput').style.display = 'none';
+                document.getElementById('createBtn').innerText = "તમે પણ તમારું નામ બનાવો";
+                document.getElementById('createBtn').onclick = function() { window.location.href = window.location.pathname; };
+                document.body.onclick = function() { document.getElementById('myAudio').play(); };
+            } else {
+                currentQuoteIndex = Math.floor(Math.random() * quotes.length);
+                document.getElementById('random-quote').innerText = quotes[currentQuoteIndex];
+            }
+        };
+
+        function previewWish() {
+            const nameInput = document.getElementById('nameInput').value;
+            if (nameInput.trim() !== "") {
+                let newIndex;
+                do { newIndex = Math.floor(Math.random() * quotes.length); } while (newIndex === currentQuoteIndex); 
+                currentQuoteIndex = newIndex;
+                document.getElementById('random-quote').innerText = quotes[currentQuoteIndex];
+                document.getElementById('main-title').innerText = nameInput + " ના તરફથી આપ તથા આપના પરિવાર સૌને ધૂળેટીની હાર્દિક શુભેચ્છાઓ! 🌈";
+                document.getElementById('myAudio').play();
+                document.getElementById('shareBtn').style.display = 'block';
+                document.getElementById('createBtn').style.display = 'none';
+                document.getElementById('nameInput').style.display = 'none';
+                window.tempName = nameInput;
+            } else { alert("મહેરબાની કરીને તમારું નામ લખો!"); }
+        }
+
+        function sendToWhatsApp() {
+            const shareURL = window.location.origin + window.location.pathname + "?name=" + encodeURIComponent(window.tempName) + "&q=" + currentQuoteIndex;
+            const msg = "*" + window.tempName + "* એ તમારા માટે ધૂળેટીની ખાસ શુભેચ્છા મોકલી છે! 😍✨\n\nનીચેની લિંક પર ક્લિક કરીને જુઓ:\n" + shareURL;
+            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(msg), '_blank');
+        }
+
+        setInterval(() => {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            const colors = ['#FF1493', '#00BFFF', '#32CD32', '#FFD700', '#FF4500'];
+            const size = Math.random() * 15 + 10 + 'px';
+            dot.style.width = size; dot.style.height = size;
+            dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+            dot.style.left = Math.random() * 100 + 'vw';
+            dot.style.bottom = '-20px'; 
+            document.body.appendChild(dot);
+            setTimeout(() => dot.remove(), 5000);
+        }, 400);
+    </script>
+</body>
+</html>
