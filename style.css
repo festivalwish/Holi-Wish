@@ -16,15 +16,16 @@ header { margin-top: 80px; z-index: 10; text-align: center; padding: 0 15px; }
 
 /* સેન્ટર કલર PNG */
 .img-color {
-    position: absolute; top: 50%; left: 49%;  width: 60%;
+    position: absolute; top: 50%; left: 45%;  width: 100%;
     transform: translate(-50%, -50%); opacity: 0.7; z-index: 4; 
+    
 }
 
 /* છોકરી હવે ડાબી બાજુ */
-.img-girl { position: absolute; top: 60%; right: 8%; height: 100%; z-index: 6; }
+.img-girl { position: absolute; top: 100%; right: -1%; height: 100%; z-index: 6; }
 
 /* છોકરો હવે જમણી બાજુ */
-.img-boy { position: absolute;top: 50%;  left: 8%; height: 120%; z-index: 6; }
+.img-boy { position: absolute;top: 95%;  left: -1%; height: 105%; z-index: 6; }
 
 /* બાકીની સ્ટાઇલ અગાઉ મુજબ જ છે */
 .countdown-timer { margin-top: 10px; text-align: center; z-index: 10; }
@@ -125,7 +126,7 @@ input { padding: 12px; border-radius: 30px; border: 2px solid #e91e63; text-alig
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 70px;
+    width: 50px;
     height: 70px;
     background: linear-gradient(45deg, #ff4081, #e91e63);
     border-radius: 50%;
@@ -208,3 +209,99 @@ body {
     .countdown-timer {
         margin: 20px 0 !important;
     }
+
+    /* ૫. 'Created by' ને સૌથી નીચે મોકલો */
+    .logo {
+        margin-top: 60px !important; 
+        padding-bottom: 40px; /* નીચેથી એક્સ્ટ્રા જગ્યા */
+    }
+}
+@media screen and (max-width: 600px) {
+    .img-color {
+        width: 140px; /* મોબાઈલમાં કલર ફોટો નાનો રહેશે */
+    }
+    .img-boy, img-girl {
+        height: 135px; /* મોબાઈલમાં કેરેક્ટર નાના દેખાશે */
+    }.img-girl {
+    height: 118px; /* ૨૦૦ ની જગ્યાએ ૧૫૦ કરવાથી ફોટા નાના થઈ જશે */
+}
+
+}
+/* કાઉન્ટડાઉન ટેક્સ્ટ અને નંબર નાના કરવા માટે */
+#timer {
+    font-size: 1rem !important; /* અગાઉના ૧.૨ કરતા ઓછું */
+    gap: 5px !important;
+}
+
+#timer span {
+    padding: 1px 2px !important; ; /* બોક્સ નાના કરવા માટે */
+    border-radius: 5px !important;
+    font-weight: 600 !important;
+}
+
+#timer-text {
+    font-size: 0.9rem !important;
+}
+/* મ્યુઝિક ફ્લોટિંગ બટન નાનું કરવા માટે */
+.music-float {
+    width: 50px !important; /* ૭૦ માંથી ૫૦ કર્યું */
+    height: 50px !important;
+    bottom: 15px !important;
+    right: 15px !important;
+}
+
+.music-float span {
+    font-size: 25px !important; /* આઈકોન નાનો થશે */
+}
+
+.music-text {
+    font-size: 7px !important; /* નીચેનું લખાણ એકદમ નાનું */
+    margin-top: 1px !important;
+}
+.img-color {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* પહોળાઈ (Pholo) વધારવા માટે */
+    width: 600px !important;  /* અગાઉ ૩૨૦ હતું, હવે ૪૫૦ કર્યું */
+    
+    /* લંબાઈ (Lambo) વધારવા માટે */
+    height: 600px !important; /* નવી લંબાઈ ઉમેરી */
+    
+    /* ફોટો ખેંચાય નહીં તે માટે */
+    object-fit: contain; 
+    
+    opacity: 0.4; /* થોડું ઝાંખું રાખવું જેથી લખાણ વંચાય */
+    z-index: 1;   /* છોકરા-છોકરીના ફોટાની પાછળ રહેશે */
+}
+/* આખા પેજની નીચે એક્સ્ટ્રા જગ્યા છોડવા માટે */
+body {
+    padding-bottom: 100px !important; 
+}
+
+/* 'Created by' માટે ખાસ સ્પેસિંગ */
+.footer-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;    /* ઉપરના બટનોથી ૫૦ પિક્સેલની જગ્યા */
+    padding-bottom: 20px;
+}
+
+.logo {
+    font-size: 0.9rem;
+    color: #e91e63;
+    text-decoration: none;
+    font-weight: bold;
+    border-top: 1px solid #eee; /* એક નાની લાઈન જે લખાણને અલગ પાડશે */
+    padding-top: 10px;
+    display: inline-block;
+}
+
+/* મોબાઈલ માટે ખાસ જગ્યા */
+@media screen and (max-width: 600px) {
+    .footer-container {
+        margin-top: 40px; /* મોબાઈલમાં પૂરતી મોકળાશ */
+    }
+}
